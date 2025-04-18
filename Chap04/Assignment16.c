@@ -1,7 +1,7 @@
-/* 파일명: Assignment15.c
- * 내용: PA04. 우리가 알고 있는 환율은 매매기준율이다. 실제 달러를 구입할 때는 매매기준율에 은행의 환전수수료ㅛ를 더해서 환율이 결정된다. 환전 수수료는 환전우대율에 따라 달라진다.
- *             환전수수료율은 은행마다 미리 정해지며, 환전우대율은 고객ㄱ마다 다르게 책정된다. 환전수수료율은 1.75%로 정해져 있다고 가정하고 원-달러 매매기준율과 환전우대율(%)를 입력받아
- *             달러를 살 떼 적용되는 환율을 결정하고, 구입하고자 하는 달러가 얼마인지 입력받아서 몇 원에 해당하는지 출력하는 프로그램을 작성하시오.
+/* 파일명: Assignment16.c
+ * 내용: PA04. 컴퓨터 시스템에서 색상을 표현하는 방법 중에 RGB 표기법은 red, green,blue에 8비트씩을 사용해서 색상을 표현하므로 24비트 트루컬러라고 한다. 컴퓨터 시스템에서는
+ *             32비트 데이터의 최하위 바이트부터 red, green, blue의 순서로 색상 정보를 저장하고 최상위 바이트는 사용하지 않고 0으로 채운다. 0~255 사이의 값을 red, green, blue의 순서로
+ *             3개 입력받아서 RGB 색상을 만들어서 출력하는 프로그램을 작성하시오. RGB 색상을 출력할 때는 바이트 단위로 값을 알아보기 쉽도록 16진수로 출력한다.
  * 작성자: 박로사
  * 날짜: 2025.4.18
  * 버전: 17.13.3
@@ -11,37 +11,35 @@
 
 #include <stdio.h>
 
-int assignment05(void);
+int assignment16(void);
 
 int main(void)
 {
-    int result = assignment05();
+    assignment16();
     return 0;
 }
 
-int assignment05(void)
+int assignment16(void)
 {
-    const double FEE_RATE = 0.0175;
-    double baseRate, benefitRate, fee, finalRate, usdAmount, krw;
+    unsigned int red, green, blue;
+    unsigned int color;
 
-    printf("원/달러 매매기준율? ");
-    scanf("%lf", &baseRate);
+    printf("red? ");
+    scanf("%u", &red);
 
-    printf("환율우대율(0~100%%)? ");
-    scanf("%lf", &benefitRate);
+    printf("green? ");
+    scanf("%u", &green);
 
-    fee = baseRate * FEE_RATE * (1.0 - benefitRate / 100.0);
+    printf("blue? ");
+    scanf("%u", &blue);
 
-    finalRate = baseRate + fee;
+    red &= 0xFF;
+    green &= 0xFF;
+    blue &= 0xFF;
 
-    printf("달러 살 때 환율은 %.6f입니다.\n", finalRate);
+    color = (blue << 16) | (green << 8) | red;
 
-    printf("구입할 달러(USD)? ");
-    scanf("%lf", &usdAmount);
-
-    krw = finalRate * usdAmount;
-
-    printf("USD %.2f 살 때 ==> KRW %.2f\n", usdAmount, krw);
+    printf("RGB 트루컬러: %08X\n", color);
 
     return 0;
 }

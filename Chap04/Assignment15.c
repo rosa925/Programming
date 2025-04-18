@@ -11,15 +11,15 @@
 
 #include <stdio.h>
 
-int assignment05(void);
+int assignment15(void);
 
 int main(void)
 {
-    int result = assignment05();
+    int result = assignment15();
     return 0;
 }
 
-int assignment05(void)
+int assignment15(void)
 {
     const double FEE_RATE = 0.0175;
     double baseRate, benefitRate, fee, finalRate, usdAmount, krw;
